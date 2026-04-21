@@ -61,7 +61,7 @@
 
 #### 가. 반응식과 엔탈피
 
-$$N_2(g) + 3H_2(g) \rightleftharpoons 2NH_3(g), \quad \Delta H = -92\ \text{kJ/mol}$$
+> **N₂(g) + 3H₂(g) ⇌ 2NH₃(g),  ΔH = −92 kJ/mol**
 
 정반응은 발열 반응이며, 기체 몰수가 4 → 2로 감소한다.
 
