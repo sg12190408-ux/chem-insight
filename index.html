@@ -143,6 +143,38 @@
       margin: 8px 0;
     }
 
+    /* 본문 굵은 글씨 — 형광펜 효과 (수업 발표용 강조) */
+    .markdown-section p strong,
+    .markdown-section > ul li strong,
+    .markdown-section > ol li strong,
+    .markdown-section .topic-card li strong {
+      background: linear-gradient(transparent 62%, #ffe7a8 62%);
+      padding: 0 2px;
+      border-radius: 2px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    /* 표 셀 내부 bold는 구조 라벨 — 형광펜 제외 */
+    .markdown-section table strong {
+      background: none;
+      padding: 0;
+    }
+    /* 블록쿼트 — 이미 연두 배경이 있어 채도·불투명도 낮춘 금색 */
+    .markdown-section blockquote p strong,
+    .markdown-section blockquote li strong {
+      background: linear-gradient(transparent 62%, rgba(255, 200, 80, 0.45) 62%);
+    }
+    /* 주제 카드 쟁점/질문 — 채도 높은 금색으로 분홍·연두 배경 위에서도 부각 */
+    .markdown-section .topic-card li.card-issue strong,
+    .markdown-section .topic-card li.card-question strong {
+      background: linear-gradient(transparent 62%, rgba(255, 190, 50, 0.55) 62%);
+    }
+    /* 코드 내부 방어적 제외 */
+    .markdown-section code strong {
+      background: none;
+      padding: 0;
+    }
+
     /* 모바일 — 카드 내부 패딩 축소 */
     @media (max-width: 600px) {
       .markdown-section .topic-card {
