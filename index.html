@@ -8,18 +8,32 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
     :root {
-      --theme-color: #2c7a7b;
-      --theme-color-dark: #234e52;
-      --theme-color-soft: #e6fffa;
-      --accent-warm: #c05621;
-      --accent-warm-soft: #fffaf0;
-      --accent-cool: #553c9a;
-      --ink: #1a202c;
-      --muted: #4a5568;
+      /* 4월 봄 팔레트 — 새잎 연두 + 벚꽃 분홍 + 라일락 */
+      --theme-color: #6ba368;          /* 새잎 연두 */
+      --theme-color-dark: #3d6b42;     /* 짙은 잎사귀 */
+      --theme-color-soft: #eef6ea;     /* 아주 연한 연둣빛 */
+      --accent-warm: #d97a99;          /* 벚꽃 분홍 */
+      --accent-warm-soft: #fdf2f5;     /* 연한 벚꽃 배경 */
+      --accent-cool: #8f7ab8;          /* 라일락 */
+      --ink: #2d2a32;
+      --muted: #6b6670;
+      --bg-cream: #fdfbf5;             /* 은은한 크림 배경 */
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
       color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #fdf2f5 0%, transparent 60%),
+        radial-gradient(1000px 500px at 110% 10%, #eef6ea 0%, transparent 55%),
+        var(--bg-cream);
+      background-attachment: fixed;
+    }
+    .sidebar {
+      background: rgba(253, 251, 245, 0.85);
+      border-right: 1px solid #ece6dc;
+    }
+    .content {
+      background: transparent;
     }
     .sidebar { padding-top: 12px; }
     .markdown-section { max-width: 880px; }
@@ -78,6 +92,22 @@
       text-decoration: none;
     }
     .markdown-section code { color: var(--accent-warm); background: var(--accent-warm-soft); }
+
+    /* 주제 카드 강조 — 🔥 비판적 쟁점 / 💬 탐구 질문 */
+    .markdown-section li.card-issue {
+      background: linear-gradient(90deg, var(--accent-warm-soft), transparent 92%);
+      border-left: 3px solid var(--accent-warm);
+      padding: 6px 10px 6px 12px;
+      border-radius: 0 6px 6px 0;
+      margin: 4px 0;
+    }
+    .markdown-section li.card-question {
+      background: linear-gradient(90deg, var(--theme-color-soft), transparent 92%);
+      border-left: 3px solid var(--theme-color);
+      padding: 6px 10px 6px 12px;
+      border-radius: 0 6px 6px 0;
+      margin: 4px 0;
+    }
   </style>
 </head>
 <body>
@@ -106,7 +136,18 @@
         buttonText: '복사',
         errorText: '오류',
         successText: '복사됨'
-      }
+      },
+      plugins: [
+        function (hook) {
+          hook.doneEach(function () {
+            document.querySelectorAll('.markdown-section li').forEach(function (li) {
+              var t = li.textContent.replace(/^\s+/, '');
+              if (t.indexOf('🔥') === 0) li.classList.add('card-issue');
+              else if (t.indexOf('💬') === 0) li.classList.add('card-question');
+            });
+          });
+        }
+      ]
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
