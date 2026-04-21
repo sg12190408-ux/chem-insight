@@ -13,7 +13,7 @@
   - [주제 카드 27선](Chem_Insight_주제_키워드_가이드.md?id=3-단원별-주제-카드-총-27개)
   - [좋은 주제의 조건](Chem_Insight_주제_키워드_가이드.md?id=4-좋은-주제의-조건-피해야-할-주제)
   - [자료 출처 신뢰성](Chem_Insight_주제_키워드_가이드.md?id=5-자료-출처-신뢰성-가이드)
-  - [진로·관심 분야별 주제](Chem_Insight_주제_키워드_가이드.md?id=6-진로관심-분야별-주제-매칭)
+  - [진로·관심 분야별 주제](Chem_Insight_주제_키워드_가이드.md?id=6-진로·관심-분야별-주제-매칭)
 - **🔗 바로가기**
   - [💻 화학Ⅱ 수업 홈페이지(노션)](https://capable-asparagus-48d.notion.site/2-318e74cab53680ecaf4bfeb8db0817fd?source=copy_link)
   - [📥 예시 보고서 DOCX 다운로드](Chem_Insight_예시_보고서_그린암모니아.docx)
