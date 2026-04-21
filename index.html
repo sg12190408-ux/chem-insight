@@ -93,20 +93,62 @@
     }
     .markdown-section code { color: var(--accent-warm); background: var(--accent-warm-soft); }
 
-    /* 주제 카드 강조 — 🔥 비판적 쟁점 / 💬 탐구 질문 */
+    /* 주제 카드 컨테이너 — h4 + 불릿 5줄을 하나의 상자로 묶어 가독성 향상 */
+    .markdown-section .topic-card {
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid #ece6dc;
+      border-top: 3px solid var(--accent-cool);
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      padding: 14px 20px 16px;
+      margin: 20px 0;
+    }
+    .markdown-section .topic-card > h4 {
+      border-left: none;
+      padding-left: 0;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+    .markdown-section .topic-card > ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .markdown-section .topic-card > ul > li {
+      line-height: 1.65;
+    }
+
+    /* 메타 라인 — 🔗 단원 / 🧩 개념 / 📚 자료 (톤 다운) */
+    .markdown-section .topic-card li.card-meta {
+      color: var(--muted);
+      font-size: 0.92em;
+      line-height: 1.5;
+      margin: 3px 0;
+    }
+
+    /* 핵심 강조 — 🔥 비판적 쟁점 / 💬 탐구 질문 */
     .markdown-section li.card-issue {
       background: linear-gradient(90deg, var(--accent-warm-soft), transparent 92%);
       border-left: 3px solid var(--accent-warm);
-      padding: 6px 10px 6px 12px;
+      padding: 8px 12px 8px 14px;
       border-radius: 0 6px 6px 0;
-      margin: 4px 0;
+      margin: 8px 0;
     }
     .markdown-section li.card-question {
       background: linear-gradient(90deg, var(--theme-color-soft), transparent 92%);
       border-left: 3px solid var(--theme-color);
-      padding: 6px 10px 6px 12px;
+      padding: 8px 12px 8px 14px;
       border-radius: 0 6px 6px 0;
-      margin: 4px 0;
+      margin: 8px 0;
+    }
+
+    /* 모바일 — 카드 내부 패딩 축소 */
+    @media (max-width: 600px) {
+      .markdown-section .topic-card {
+        padding: 12px 14px 14px;
+        margin: 14px 0;
+      }
     }
   </style>
 </head>
@@ -140,10 +182,30 @@
       plugins: [
         function (hook) {
           hook.doneEach(function () {
-            document.querySelectorAll('.markdown-section li').forEach(function (li) {
-              var t = li.textContent.replace(/^\s+/, '');
-              if (t.indexOf('🔥') === 0) li.classList.add('card-issue');
-              else if (t.indexOf('💬') === 0) li.classList.add('card-question');
+            document.querySelectorAll('.markdown-section h4').forEach(function (h4) {
+              var ul = h4.nextElementSibling;
+              if (!ul || ul.tagName !== 'UL') return;
+              var items = ul.querySelectorAll(':scope > li');
+              var hasIssue = false;
+              items.forEach(function (li) {
+                if (li.textContent.replace(/^\s+/, '').indexOf('🔥') === 0) hasIssue = true;
+              });
+              if (!hasIssue) return;
+
+              var card = document.createElement('section');
+              card.className = 'topic-card';
+              h4.parentNode.insertBefore(card, h4);
+              card.appendChild(h4);
+              card.appendChild(ul);
+
+              items.forEach(function (li) {
+                var t = li.textContent.replace(/^\s+/, '');
+                if (t.indexOf('🔥') === 0) li.classList.add('card-issue');
+                else if (t.indexOf('💬') === 0) li.classList.add('card-question');
+                else if (t.indexOf('🔗') === 0 || t.indexOf('🧩') === 0 || t.indexOf('📚') === 0) {
+                  li.classList.add('card-meta');
+                }
+              });
             });
           });
         }
