@@ -7,12 +7,77 @@
   <meta name="description" content="현대 화학의 비판적 시선 담기 — 화학Ⅱ 수행평가 자료">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
-    :root { --theme-color: #2c7a7b; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; }
+    :root {
+      --theme-color: #2c7a7b;
+      --theme-color-dark: #234e52;
+      --theme-color-soft: #e6fffa;
+      --accent-warm: #c05621;
+      --accent-warm-soft: #fffaf0;
+      --accent-cool: #553c9a;
+      --ink: #1a202c;
+      --muted: #4a5568;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+      color: var(--ink);
+    }
     .sidebar { padding-top: 12px; }
     .markdown-section { max-width: 880px; }
-    .markdown-section h1, .markdown-section h2 { border-bottom: 1px solid #eee; padding-bottom: 6px; }
+
+    /* 제목 계층 — 색과 형태로 구분 */
+    .markdown-section h1 {
+      color: var(--theme-color-dark);
+      border-bottom: 4px solid var(--theme-color);
+      padding-bottom: 12px;
+      margin-top: 2.2em;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .markdown-section h2 {
+      color: var(--theme-color-dark);
+      border-left: 6px solid var(--theme-color);
+      padding: 10px 0 10px 16px;
+      background: linear-gradient(90deg, var(--theme-color-soft), transparent 70%);
+      border-radius: 0 6px 6px 0;
+      margin-top: 2em;
+      font-weight: 700;
+    }
+    .markdown-section h3 {
+      color: var(--accent-warm);
+      border-bottom: 2px dashed var(--accent-warm);
+      padding-bottom: 5px;
+      margin-top: 1.6em;
+      font-weight: 700;
+    }
+    .markdown-section h4 {
+      color: var(--accent-cool);
+      padding-left: 12px;
+      border-left: 4px solid var(--accent-cool);
+      margin-top: 1.3em;
+      font-weight: 700;
+    }
+    .markdown-section h5, .markdown-section h6 {
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 1.1em;
+    }
+
+    /* 보조 스타일 */
     .markdown-section table { display: table; width: 100%; }
+    .markdown-section blockquote {
+      border-left: 4px solid var(--theme-color);
+      background: var(--theme-color-soft);
+      color: var(--ink);
+      border-radius: 0 6px 6px 0;
+    }
+    .markdown-section a { color: var(--theme-color); text-decoration: underline; text-underline-offset: 2px; }
+    .markdown-section a:hover { color: var(--accent-warm); }
+    .markdown-section h1 a, .markdown-section h2 a, .markdown-section h3 a,
+    .markdown-section h4 a, .markdown-section h5 a, .markdown-section h6 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .markdown-section code { color: var(--accent-warm); background: var(--accent-warm-soft); }
   </style>
 </head>
 <body>
