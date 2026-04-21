@@ -40,12 +40,56 @@
 
     /* 제목 계층 — 색과 형태로 구분 */
     .markdown-section h1 {
-      color: var(--theme-color-dark);
-      border-bottom: 4px solid var(--theme-color);
-      padding-bottom: 12px;
-      margin-top: 2.2em;
+      position: relative;
+      background: linear-gradient(135deg, #fdf2f5 0%, #fff7e6 45%, #eef6ea 100%);
+      background-image:
+        radial-gradient(circle at 88% 30%, rgba(217, 122, 153, 0.18) 0%, transparent 28%),
+        radial-gradient(circle at 15% 75%, rgba(107, 163, 104, 0.18) 0%, transparent 30%),
+        linear-gradient(135deg, #fdf2f5 0%, #fff7e6 45%, #eef6ea 100%);
+      border: 1px solid rgba(217, 122, 153, 0.18);
+      border-radius: 14px;
+      padding: 28px 32px 26px;
+      margin-top: 1.2em;
+      margin-bottom: 1.4em;
       font-weight: 800;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
+      font-size: 2.1em;
+      box-shadow: 0 2px 10px rgba(217, 122, 153, 0.08), 0 1px 3px rgba(107, 163, 104, 0.06);
+      background-clip: padding-box;
+    }
+    .markdown-section h1 > a {
+      background: linear-gradient(100deg, var(--theme-color-dark) 0%, var(--accent-cool) 55%, var(--accent-warm) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .markdown-section h1::before {
+      content: "🌸";
+      position: absolute;
+      top: -18px;
+      right: 24px;
+      font-size: 1.15em;
+      background: #fff;
+      border-radius: 50%;
+      width: 2.1em;
+      height: 2.1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(217, 122, 153, 0.22);
+      -webkit-text-fill-color: initial;
+    }
+    .markdown-section h1::after {
+      content: "";
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 14px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--theme-color) 0%, var(--accent-warm) 50%, var(--accent-cool) 100%);
+      border-radius: 2px;
+      opacity: 0.55;
     }
     .markdown-section h2 {
       color: var(--theme-color-dark);
