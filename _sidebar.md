@@ -1,0 +1,5 @@
+- **Chem Insight**
+- [🏠 대시보드 (시작하기)](Chem_Insight_수행평가_대시보드.md)
+- [📘 주제·키워드 가이드](Chem_Insight_주제_키워드_가이드.md)
+- [📗 예시 보고서 — 그린 암모니아](Chem_Insight_예시_보고서_그린암모니아.md)
+- [📝 학생용 보고서 양식](Chem_Insight_학생용_보고서_양식.md)
