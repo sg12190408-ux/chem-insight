@@ -146,10 +146,10 @@
 
 ## 5. 참고 문헌 및 자료 출처
 
-1. International Energy Agency (2021). *Ammonia Technology Roadmap: Towards more sustainable nitrogen fertiliser production*. https://www.iea.org/reports/ammonia-technology-roadmap (접속일: 2026-05-10)
+1. International Energy Agency (2021). *Ammonia Technology Roadmap: Towards more sustainable nitrogen fertiliser production*. https://www.iea.org/reports/ammonia-technology-roadmap
 2. Smil, V. et al. (2020). The Haber–Bosch process: A pivotal moment in modern industrial chemistry. *Nature Catalysis*, 3, 1052–1057.
 3. 교육부 (2022). 『고등학교 화학Ⅱ』. 2022 개정 교육과정 교과서.
-4. 한국에너지공단 (2023). 『2023 에너지통계연보』. https://www.energy.or.kr (접속일: 2026-05-12)
+4. 한국에너지공단 (2023). 『2023 에너지통계연보』. https://www.energy.or.kr
 
 ---
 
