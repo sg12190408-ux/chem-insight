@@ -16,5 +16,5 @@
   - [진로·관심 분야별 주제](Chem_Insight_주제_키워드_가이드.md?id=_6-진로·관심-분야별-주제-매칭)
 - **🔗 바로가기**
   - [💻 화학Ⅱ 수업 홈페이지(노션)](https://capable-asparagus-48d.notion.site/2-318e74cab53680ecaf4bfeb8db0817fd?source=copy_link)
-  - [📥 예시 보고서 DOCX 다운로드](Chem_Insight_예시_보고서_그린암모니아.docx)
-  - [📥 학생용 보고서 양식 DOCX 다운로드](Chem_Insight_학생용_보고서_양식.docx)
+  - <a href="Chem_Insight_예시_보고서_그린암모니아.docx" target="_blank" rel="noopener">📥 예시 보고서 DOCX</a>
+  - <a href="Chem_Insight_학생용_보고서_양식.docx" target="_blank" rel="noopener">📥 학생용 양식 DOCX</a>
