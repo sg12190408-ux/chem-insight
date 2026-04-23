@@ -16,6 +16,7 @@ cp "$SRC/Chem_Insight_주제_키워드_가이드.md" "$DST/"
 cp "$SRC/Chem_Insight_예시_보고서_그린암모니아.md" "$DST/"
 cp "$SRC/Chem_Insight_예시_보고서_그린암모니아.docx" "$DST/"
 cp "$SRC/Chem_Insight_학생용_보고서_양식.md" "$DST/"
+cp "$SRC/Chem_Insight_학생용_보고서_양식.docx" "$DST/"
 
 if [[ -z "$(git status --porcelain)" ]]; then
   echo "✓ 변경 사항 없음. 종료."

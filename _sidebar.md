@@ -3,7 +3,7 @@
 - **📚 자료**
   - [📘 주제·키워드 가이드](Chem_Insight_주제_키워드_가이드.md)
   - [📗 예시 보고서 — 그린 암모니아](Chem_Insight_예시_보고서_그린암모니아.md)
-  - 📝 학생용 보고서 양식 (추후 업로드 예정)
+  - [📝 학생용 보고서 양식](Chem_Insight_학생용_보고서_양식.md)
 - **⏱ 대시보드 빠른 이동**
   - [주차별 타임라인](Chem_Insight_수행평가_대시보드.md?id=_4-작성-여정-한눈에-주차별-타임라인-대시보드)
   - [자기 점검 체크리스트](Chem_Insight_수행평가_대시보드.md?id=_6-quot좋은-보고서quot의-정성적-지표-자기-점검-체크리스트)
@@ -17,3 +17,4 @@
 - **🔗 바로가기**
   - [💻 화학Ⅱ 수업 홈페이지(노션)](https://capable-asparagus-48d.notion.site/2-318e74cab53680ecaf4bfeb8db0817fd?source=copy_link)
   - [📥 예시 보고서 DOCX 다운로드](Chem_Insight_예시_보고서_그린암모니아.docx)
+  - [📥 학생용 보고서 양식 DOCX 다운로드](Chem_Insight_학생용_보고서_양식.docx)
