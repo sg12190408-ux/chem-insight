@@ -5,227 +5,528 @@
   <title>Chem Insight — 화학Ⅱ 수행평가</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="현대 화학의 비판적 시선 담기 — 화학Ⅱ 수행평가 자료">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
     :root {
-      /* 4월 봄 팔레트 — 새잎 연두 + 벚꽃 분홍 + 라일락 */
-      --theme-color: #6ba368;          /* 새잎 연두 */
-      --theme-color-dark: #3d6b42;     /* 짙은 잎사귀 */
-      --theme-color-soft: #eef6ea;     /* 아주 연한 연둣빛 */
-      --accent-warm: #d97a99;          /* 벚꽃 분홍 */
-      --accent-warm-soft: #fdf2f5;     /* 연한 벚꽃 배경 */
-      --accent-cool: #8f7ab8;          /* 라일락 */
-      --ink: #2d2a32;
-      --muted: #6b6670;
-      --bg-cream: #fdfbf5;             /* 은은한 크림 배경 */
+      /* CHEM_LAB.TERMINAL — dark + neon */
+      --bg-base: #0a0e1a;             /* 우주 네이비 */
+      --bg-elev-1: rgba(20, 26, 42, 0.55);
+      --bg-elev-2: rgba(28, 34, 52, 0.78);
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.16);
+
+      --neon-lime: #5dff8e;
+      --neon-cyan: #38e8ff;
+      --neon-magenta: #ff5d9e;
+      --neon-amber: #ffd166;
+
+      --ink: #e8ecf3;
+      --muted: #9aa3b8;
+      --dim: #5b6376;
+
+      --theme-color: var(--neon-lime);
+      --theme-color-dark: #2dd66a;
+
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    html, body {
+      background: var(--bg-base);
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(1200px 600px at 10% -10%, #fdf2f5 0%, transparent 60%),
-        radial-gradient(1000px 500px at 110% 10%, #eef6ea 0%, transparent 55%),
-        var(--bg-cream);
+        radial-gradient(900px 500px at 8% -10%, rgba(93, 255, 142, 0.10) 0%, transparent 60%),
+        radial-gradient(800px 480px at 110% 5%, rgba(56, 232, 255, 0.10) 0%, transparent 55%),
+        radial-gradient(700px 460px at 50% 110%, rgba(255, 93, 158, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, #070a13 0%, var(--bg-base) 100%);
       background-attachment: fixed;
+      position: relative;
     }
+    /* 옅은 그리드 배경 — 실험실 모눈종이 + 터미널 느낌 */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+    }
+    #app, .sidebar, .content { position: relative; z-index: 1; }
+
+    /* ===== 사이드바 ===== */
     .sidebar {
-      background: rgba(253, 251, 245, 0.85);
-      border-right: 1px solid #ece6dc;
+      background: rgba(8, 11, 20, 0.86);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-right: 1px solid var(--line);
+      padding-top: 18px;
     }
     .sidebar .app-name { display: none; }
-    .content {
-      background: transparent;
+    .sidebar ul li a {
+      color: var(--muted);
+      transition: color .15s ease, transform .15s ease;
     }
-    .sidebar { padding-top: 12px; }
-    .markdown-section { max-width: 880px; }
+    .sidebar ul li a:hover {
+      color: var(--neon-lime);
+      transform: translateX(2px);
+    }
+    .sidebar ul li.active > a {
+      color: var(--neon-lime);
+      border-right: 2px solid var(--neon-lime);
+      font-weight: 700;
+      filter: drop-shadow(0 0 6px rgba(93, 255, 142, 0.45));
+    }
+    .sidebar ul li strong, .sidebar ul li p {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 0.82em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
 
-    /* 제목 계층 — 색과 형태로 구분 */
+    /* ===== 검색 입력 ===== */
+    .sidebar .search input {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid var(--line-strong) !important;
+      color: var(--ink) !important;
+      border-radius: 8px !important;
+      font-family: var(--mono) !important;
+      font-size: 0.9em !important;
+    }
+    .sidebar .search input::placeholder { color: var(--dim); }
+    .sidebar .search input:focus {
+      border-color: var(--neon-lime) !important;
+      outline: none !important;
+      box-shadow: 0 0 0 3px rgba(93, 255, 142, 0.18) !important;
+    }
+    .sidebar .search .results-panel {
+      background: var(--bg-elev-2);
+      color: var(--ink);
+    }
+
+    /* ===== 본문 컨테이너 ===== */
+    .content { background: transparent; }
+    .markdown-section { max-width: 880px; }
+    .markdown-section p, .markdown-section li { color: #d6dbe6; }
+    .markdown-section hr { border-top: 1px dashed var(--line-strong); }
+
+    /* ===== H1 — 글래스 카드 + 모노 헤더 + 네온 그라데이션 타이틀 ===== */
     .markdown-section h1 {
       position: relative;
-      background: linear-gradient(135deg, #fdf2f5 0%, #fff7e6 45%, #eef6ea 100%);
-      background-image:
-        radial-gradient(circle at 88% 30%, rgba(217, 122, 153, 0.18) 0%, transparent 28%),
-        radial-gradient(circle at 15% 75%, rgba(107, 163, 104, 0.18) 0%, transparent 30%),
-        linear-gradient(135deg, #fdf2f5 0%, #fff7e6 45%, #eef6ea 100%);
-      border: 1px solid rgba(217, 122, 153, 0.18);
+      background:
+        radial-gradient(circle at 90% 20%, rgba(93, 255, 142, 0.18) 0%, transparent 38%),
+        radial-gradient(circle at 10% 90%, rgba(56, 232, 255, 0.14) 0%, transparent 40%),
+        linear-gradient(135deg, rgba(20,26,42,0.85) 0%, rgba(14,18,30,0.85) 100%);
+      border: 1px solid var(--line-strong);
       border-radius: 14px;
-      padding: 28px 32px 26px;
-      margin-top: 1.2em;
+      padding: 36px 32px 28px;
+      margin-top: 0.4em;
       margin-bottom: 1.4em;
       font-weight: 800;
       letter-spacing: -0.015em;
-      font-size: 2.1em;
-      box-shadow: 0 2px 10px rgba(217, 122, 153, 0.08), 0 1px 3px rgba(107, 163, 104, 0.06);
-      background-clip: padding-box;
+      font-size: 2.05em;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.04) inset,
+        0 18px 40px -20px rgba(0,0,0,0.6),
+        0 0 60px -20px rgba(93, 255, 142, 0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      overflow: hidden;
     }
     .markdown-section h1 > a {
-      background: linear-gradient(100deg, var(--theme-color-dark) 0%, var(--accent-cool) 55%, var(--accent-warm) 100%);
+      background: linear-gradient(100deg, #b9ffce 0%, var(--neon-lime) 30%, var(--neon-cyan) 70%, #c8a8ff 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
+      filter: drop-shadow(0 0 18px rgba(93, 255, 142, 0.18));
     }
+    /* 좌상단 모노 라벨 */
     .markdown-section h1::before {
-      content: "🌸";
+      content: "// CHEM_INSIGHT.MD";
       position: absolute;
-      top: -18px;
-      right: 24px;
-      font-size: 1.15em;
-      background: #fff;
-      border-radius: 50%;
-      width: 2.1em;
-      height: 2.1em;
+      top: 12px;
+      left: 24px;
+      font-family: var(--mono);
+      font-size: 0.42em;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--neon-lime);
+      opacity: 0.75;
+      text-transform: uppercase;
+    }
+    /* 우상단 시험관 + 펄스 점 */
+    .markdown-section h1::after {
+      content: "🧪";
+      position: absolute;
+      top: 14px;
+      right: 22px;
+      font-size: 1.05em;
+      width: 2.05em;
+      height: 2.05em;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(217, 122, 153, 0.22);
+      background: rgba(93, 255, 142, 0.08);
+      border: 1px solid rgba(93, 255, 142, 0.3);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 4px rgba(93, 255, 142, 0.06),
+        0 0 18px rgba(93, 255, 142, 0.25);
       -webkit-text-fill-color: initial;
     }
-    .markdown-section h1::after {
+
+    /* ===== H2 — `▮` 프롬프트 + 하단 네온 라인 ===== */
+    .markdown-section h2 {
+      position: relative;
+      color: #f0fff5;
+      padding: 14px 0 12px 0;
+      margin-top: 2.2em;
+      margin-bottom: 1em;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid var(--line-strong);
+      background: none;
+      border-left: none;
+    }
+    .markdown-section h2::before {
+      content: "▶";
+      color: var(--neon-lime);
+      margin-right: 12px;
+      font-size: 0.78em;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 6px rgba(93, 255, 142, 0.6));
+    }
+    .markdown-section h2::after {
       content: "";
       position: absolute;
-      left: 32px;
-      right: 32px;
-      bottom: 14px;
+      left: 0;
+      bottom: -1px;
+      width: 80px;
       height: 2px;
-      background: linear-gradient(90deg, var(--theme-color) 0%, var(--accent-warm) 50%, var(--accent-cool) 100%);
+      background: linear-gradient(90deg, var(--neon-lime), transparent);
       border-radius: 2px;
-      opacity: 0.55;
+      box-shadow: 0 0 10px rgba(93, 255, 142, 0.5);
     }
-    .markdown-section h2 {
-      color: var(--theme-color-dark);
-      border-left: 6px solid var(--theme-color);
-      padding: 10px 0 10px 16px;
-      background: linear-gradient(90deg, var(--theme-color-soft), transparent 70%);
-      border-radius: 0 6px 6px 0;
-      margin-top: 2em;
-      font-weight: 700;
-    }
+
+    /* ===== H3 — 시안 + 화살표 ===== */
     .markdown-section h3 {
-      color: var(--accent-warm);
-      border-bottom: 2px dashed var(--accent-warm);
-      padding-bottom: 5px;
-      margin-top: 1.6em;
+      color: var(--neon-cyan);
+      border-bottom: 1px dashed rgba(56, 232, 255, 0.35);
+      padding-bottom: 6px;
+      padding-left: 0;
+      margin-top: 1.7em;
       font-weight: 700;
+      letter-spacing: -0.005em;
     }
+    .markdown-section h3::before {
+      content: "→ ";
+      color: var(--neon-cyan);
+      font-family: var(--mono);
+      font-weight: 700;
+      opacity: 0.85;
+    }
+
+    /* ===== H4 — 마젠타 + 모노 더블콜론 ===== */
     .markdown-section h4 {
-      color: var(--accent-cool);
+      color: var(--neon-magenta);
       padding-left: 12px;
-      border-left: 4px solid var(--accent-cool);
-      margin-top: 1.3em;
+      border-left: 3px solid var(--neon-magenta);
+      margin-top: 1.4em;
       font-weight: 700;
+      box-shadow: -10px 0 14px -10px rgba(255, 93, 158, 0.5);
     }
+    .markdown-section h4::before {
+      content: ":: ";
+      font-family: var(--mono);
+      color: var(--neon-magenta);
+      opacity: 0.7;
+      font-weight: 500;
+    }
+
+    /* ===== H5 / H6 ===== */
     .markdown-section h5, .markdown-section h6 {
       color: var(--muted);
       font-weight: 700;
       margin-top: 1.1em;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      font-size: 0.92em;
+      letter-spacing: 0.05em;
     }
 
-    /* 보조 스타일 */
-    .markdown-section table { display: table; width: 100%; }
-    .markdown-section blockquote {
-      border-left: 4px solid var(--theme-color);
-      background: var(--theme-color-soft);
-      color: var(--ink);
-      border-radius: 0 6px 6px 0;
+    /* ===== 표 ===== */
+    .markdown-section table {
+      display: table;
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--bg-elev-1);
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 10px;
+      overflow: hidden;
     }
-    .markdown-section a { color: var(--theme-color); text-decoration: underline; text-underline-offset: 2px; }
-    .markdown-section a:hover { color: var(--accent-warm); }
+    .markdown-section th {
+      background: rgba(93, 255, 142, 0.08);
+      color: var(--neon-lime);
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid var(--line-strong);
+    }
+    .markdown-section td {
+      border-top: 1px solid var(--line);
+      color: #d6dbe6;
+    }
+    /* vue.css가 짝수 행에 #f8f8f8(거의 흰색)을 깔아 다크 테마에서 글자가 묻힘 — 다크 톤으로 덮음 */
+    .markdown-section table tr:nth-child(2n),
+    .markdown-section table tr:nth-child(2n) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .markdown-section tr:hover td { background: rgba(93, 255, 142, 0.06); }
+
+    /* ===== 인용구 ===== */
+    .markdown-section blockquote {
+      border-left: 3px solid var(--neon-lime);
+      background: linear-gradient(90deg, rgba(93, 255, 142, 0.07), rgba(93, 255, 142, 0.0) 80%);
+      color: #e0e6f0;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 18px;
+      box-shadow: -10px 0 14px -10px rgba(93, 255, 142, 0.4);
+    }
+    .markdown-section blockquote p { color: #e0e6f0; }
+
+    /* ===== 링크 ===== */
+    .markdown-section a {
+      color: var(--neon-cyan);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(56, 232, 255, 0.5);
+      transition: color .15s, text-shadow .15s;
+    }
+    .markdown-section a:hover {
+      color: var(--neon-lime);
+      text-shadow: 0 0 10px rgba(93, 255, 142, 0.5);
+      text-decoration-color: var(--neon-lime);
+    }
     .markdown-section h1 a, .markdown-section h2 a, .markdown-section h3 a,
     .markdown-section h4 a, .markdown-section h5 a, .markdown-section h6 a {
       color: inherit;
       text-decoration: none;
     }
-    .markdown-section code { color: var(--accent-warm); background: var(--accent-warm-soft); }
+    /* docsify가 헤딩 안쪽을 <a><span>…</span></a> 로 감싸며 vue.css의 span 색(#34495e)이 박혀서
+       다크 테마에서 글자가 안 보임 — span까지 색·-webkit-text-fill-color를 상속시킴 */
+    .markdown-section h1 a span,
+    .markdown-section h2 a span,
+    .markdown-section h3 a span,
+    .markdown-section h4 a span,
+    .markdown-section h5 a span,
+    .markdown-section h6 a span {
+      color: inherit;
+      -webkit-text-fill-color: inherit;
+    }
 
-    /* 주제 카드 컨테이너 — h4 + 불릿 5줄을 하나의 상자로 묶어 가독성 향상 */
-    .markdown-section .topic-card {
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid #ece6dc;
-      border-top: 3px solid var(--accent-cool);
+    /* ===== 코드 ===== */
+    .markdown-section code {
+      color: var(--neon-lime);
+      background: rgba(93, 255, 142, 0.08);
+      border: 1px solid rgba(93, 255, 142, 0.18);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.88em;
+    }
+    .markdown-section pre {
+      background: var(--bg-elev-2);
+      border: 1px solid var(--line);
       border-radius: 10px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-      padding: 14px 20px 16px;
-      margin: 20px 0;
+    }
+    .markdown-section pre > code {
+      background: none;
+      border: none;
+      color: #d6dbe6;
+      padding: 0;
+    }
+
+    /* ===== 리스트 ===== */
+    .markdown-section ul > li::marker { color: var(--neon-lime); }
+    .markdown-section ol > li::marker { color: var(--neon-cyan); font-family: var(--mono); }
+
+    /* ===== 주제 카드 — 글래스 + 시안 네온 톱보더 ===== */
+    .markdown-section .topic-card {
+      background:
+        linear-gradient(180deg, rgba(56, 232, 255, 0.04), transparent 30%),
+        var(--bg-elev-1);
+      border: 1px solid var(--line);
+      border-top: 2px solid var(--neon-cyan);
+      border-radius: 12px;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.03) inset,
+        0 12px 30px -18px rgba(0,0,0,0.6),
+        0 0 24px -10px rgba(56, 232, 255, 0.25);
+      padding: 16px 22px 18px;
+      margin: 22px 0;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .markdown-section .topic-card > h4 {
       border-left: none;
       padding-left: 0;
       margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 1.1em;
+      margin-bottom: 12px;
+      font-size: 1.12em;
+      box-shadow: none;
+      color: var(--neon-cyan);
+    }
+    .markdown-section .topic-card > h4::before {
+      content: "[ ";
+      color: var(--neon-cyan);
+      opacity: 0.6;
+    }
+    .markdown-section .topic-card > h4::after {
+      content: " ]";
+      color: var(--neon-cyan);
+      opacity: 0.6;
     }
     .markdown-section .topic-card > ul {
       list-style: none;
       padding-left: 0;
       margin: 0;
     }
-    .markdown-section .topic-card > ul > li {
-      line-height: 1.65;
-    }
+    .markdown-section .topic-card > ul > li { line-height: 1.7; }
 
-    /* 메타 라인 — 🔗 단원 / 🧩 개념 / 📚 자료 (톤 다운) */
+    /* 메타 라인 — 단원/개념/자료 */
     .markdown-section .topic-card li.card-meta {
       color: var(--muted);
       font-size: 0.92em;
-      line-height: 1.5;
+      line-height: 1.55;
       margin: 3px 0;
+      font-family: var(--mono);
     }
 
-    /* 핵심 강조 — 🔥 비판적 쟁점 / 💬 탐구 질문 */
+    /* 비판적 쟁점 🔥 — 마젠타 네온 */
     .markdown-section li.card-issue {
-      background: linear-gradient(90deg, var(--accent-warm-soft), transparent 92%);
-      border-left: 3px solid var(--accent-warm);
-      padding: 8px 12px 8px 14px;
-      border-radius: 0 6px 6px 0;
+      background: linear-gradient(90deg, rgba(255, 93, 158, 0.10), transparent 92%);
+      border-left: 3px solid var(--neon-magenta);
+      padding: 9px 14px 9px 14px;
+      border-radius: 0 8px 8px 0;
       margin: 8px 0;
+      box-shadow: -10px 0 14px -10px rgba(255, 93, 158, 0.55);
     }
+    /* 탐구 질문 💬 — 라임 네온 */
     .markdown-section li.card-question {
-      background: linear-gradient(90deg, var(--theme-color-soft), transparent 92%);
-      border-left: 3px solid var(--theme-color);
-      padding: 8px 12px 8px 14px;
-      border-radius: 0 6px 6px 0;
+      background: linear-gradient(90deg, rgba(93, 255, 142, 0.10), transparent 92%);
+      border-left: 3px solid var(--neon-lime);
+      padding: 9px 14px 9px 14px;
+      border-radius: 0 8px 8px 0;
       margin: 8px 0;
+      box-shadow: -10px 0 14px -10px rgba(93, 255, 142, 0.55);
     }
 
-    /* 본문 굵은 글씨 — 형광펜 효과 (수업 발표용 강조) */
+    /* ===== 본문 굵은 글씨 — 네온 앰버 언더라인 (형광펜 대체) ===== */
     .markdown-section p strong,
     .markdown-section > ul li strong,
     .markdown-section > ol li strong,
     .markdown-section .topic-card li strong {
-      background: linear-gradient(transparent 62%, #ffe7a8 62%);
+      color: #fff5d8;
+      background: linear-gradient(transparent 65%, rgba(255, 209, 102, 0.28) 65%);
       padding: 0 2px;
       border-radius: 2px;
-      color: var(--ink);
       font-weight: 700;
+      text-shadow: 0 0 12px rgba(255, 209, 102, 0.25);
     }
-    /* 표 셀 내부 bold는 구조 라벨 — 형광펜 제외 */
     .markdown-section table strong {
       background: none;
       padding: 0;
+      text-shadow: none;
+      color: #f1f5ff;
+      -webkit-text-fill-color: #f1f5ff;
     }
-    /* 블록쿼트 — 이미 연두 배경이 있어 채도·불투명도 낮춘 금색 */
-    .markdown-section blockquote p strong,
-    .markdown-section blockquote li strong {
-      background: linear-gradient(transparent 62%, rgba(255, 200, 80, 0.45) 62%);
-    }
-    /* 주제 카드 쟁점/질문 — 채도 높은 금색으로 분홍·연두 배경 위에서도 부각 */
-    .markdown-section .topic-card li.card-issue strong,
-    .markdown-section .topic-card li.card-question strong {
-      background: linear-gradient(transparent 62%, rgba(255, 190, 50, 0.55) 62%);
-    }
-    /* 코드 내부 방어적 제외 */
-    .markdown-section code strong {
+    /* 헤딩 안의 strong — vue.css 기본값(#2c3e50)이 어둡게 박혀 안 보임. 헤딩 색 상속 + 형광펜 제거 */
+    .markdown-section h1 strong,
+    .markdown-section h2 strong,
+    .markdown-section h3 strong,
+    .markdown-section h4 strong,
+    .markdown-section h5 strong,
+    .markdown-section h6 strong {
+      color: inherit;
+      -webkit-text-fill-color: inherit;
       background: none;
       padding: 0;
+      text-shadow: none;
+    }
+    .markdown-section blockquote p strong,
+    .markdown-section blockquote li strong {
+      color: #fff5d8;
+      background: linear-gradient(transparent 65%, rgba(255, 209, 102, 0.32) 65%);
+    }
+    .markdown-section .topic-card li.card-issue strong {
+      color: #ffe6f0;
+      background: linear-gradient(transparent 65%, rgba(255, 93, 158, 0.45) 65%);
+      text-shadow: 0 0 12px rgba(255, 93, 158, 0.35);
+    }
+    .markdown-section .topic-card li.card-question strong {
+      color: #e7ffef;
+      background: linear-gradient(transparent 65%, rgba(93, 255, 142, 0.45) 65%);
+      text-shadow: 0 0 12px rgba(93, 255, 142, 0.35);
+    }
+    .markdown-section code strong { background: none; padding: 0; text-shadow: none; }
+
+    /* ===== 페이지네이션 ===== */
+    .docsify-pagination-container {
+      border-top: 1px dashed var(--line-strong);
+      color: var(--muted);
+    }
+    .docsify-pagination-container .pagination-item-label,
+    .docsify-pagination-container .pagination-item-title {
+      color: var(--ink);
+    }
+    .docsify-pagination-container .pagination-item:hover .pagination-item-title {
+      color: var(--neon-lime);
+    }
+    .docsify-pagination-container svg { stroke: var(--neon-lime); }
+
+    /* ===== 복사 버튼 ===== */
+    .docsify-copy-code-button {
+      background: var(--bg-elev-2) !important;
+      color: var(--neon-lime) !important;
+      border: 1px solid var(--line-strong) !important;
+      font-family: var(--mono) !important;
+      font-size: 0.78em !important;
     }
 
-    /* 모바일 — 카드 내부 패딩 축소 */
+    /* ===== 스크롤바 ===== */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #060912; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(93, 255, 142, 0.18);
+      border-radius: 8px;
+      border: 2px solid #060912;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(93, 255, 142, 0.35); }
+
+    /* ===== 텍스트 선택 ===== */
+    ::selection { background: rgba(93, 255, 142, 0.35); color: #fff; }
+
+    /* ===== 모바일 ===== */
     @media (max-width: 600px) {
-      .markdown-section .topic-card {
-        padding: 12px 14px 14px;
-        margin: 14px 0;
-      }
+      .markdown-section h1 { padding: 32px 20px 22px; font-size: 1.7em; }
+      .markdown-section h1::before { left: 16px; font-size: 0.5em; }
+      .markdown-section h1::after { right: 14px; }
+      .markdown-section .topic-card { padding: 14px 16px 16px; margin: 16px 0; }
     }
   </style>
 </head>
@@ -241,20 +542,20 @@
       auto2top: true,
       relativePath: true,
       search: {
-        placeholder: '문서 검색…',
+        placeholder: '$ grep …',
         noData: '검색 결과가 없습니다',
         depth: 3
       },
       pagination: {
-        previousText: '이전',
-        nextText: '다음',
+        previousText: '← 이전',
+        nextText: '다음 →',
         crossChapter: true,
         crossChapterText: true
       },
       copyCode: {
-        buttonText: '복사',
-        errorText: '오류',
-        successText: '복사됨'
+        buttonText: 'COPY',
+        errorText: 'ERR',
+        successText: 'OK'
       },
       plugins: [
         function (hook) {
